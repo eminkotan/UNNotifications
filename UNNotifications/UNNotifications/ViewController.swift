@@ -55,6 +55,18 @@ class ViewController: UIViewController {
             }
         }
     }
-
+        center.delegate = self
 }
 
+extension ViewController: UNUserNotificationCenterDelegate {
+    
+    // Uygulama açıkken bir bildirimin geldiğini belirtir.
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        completionHandler()
+    }
+    
+    /// Uygulama açıkken gelen bildirimlerin ekranda gözükmesini sağlayan fonksiyon
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.alert, .badge, .sound])
+    }
+}
